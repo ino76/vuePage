@@ -1,0 +1,48 @@
+<!Doctype html> 
+<html>
+    <head>
+        <title>Main - Vue</title>
+        
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
+        <div class="nav-bar">
+
+        </div>
+
+        <div id="app">
+            <div class="product">
+                <div class="product-image">
+                    <img v-bind:src="image">
+                </div>
+                <div class="product-info">
+                    <h1>{{ title }}</h1>
+                    <p v-if="inventory > 10">In stock</p>
+                    <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out! (last: {{ inventory }})</p>
+                    <p v-else>Out of stock</p>
+
+                    <ul>
+                        <li v-for="detail in details">{{ detail }}</li>
+                    </ul>
+
+                    <div v-for="variant in variants"
+                        :key="variant.variantId"
+                        class="color-box"
+                        :style="{ backgroundColor: variant.variantColorCode}"
+                        @mouseover="updateProduct(variant.variantImage)">
+                    </div>
+
+                    <button @click="addToCart">Add to cart</button>
+                    <button @click="removeFromCart">Remove from cart</button>
+                    <div class="cart">
+                        <p>Cart({{ cart }})</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src='vue.js'></script>
+        <script src='script2.js'></script>
+    </body>
+</html>
